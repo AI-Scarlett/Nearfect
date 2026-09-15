@@ -1,0 +1,16 @@
+:root { --motion-enter: 400ms; --motion-normal: 220ms; --motion-ease-out: cubic-bezier(.22,1,.36,1); }
+.motion-reveal { opacity: 1; transform: none; }
+html.motion-ready .motion-reveal:not(.visible) { opacity: 0; transform: translate3d(0, 8px, 0); }
+html.motion-ready .motion-reveal.visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity var(--motion-enter) var(--motion-ease-out) var(--motion-delay, 0ms), transform var(--motion-enter) var(--motion-ease-out) var(--motion-delay, 0ms);
+}
+a, button, .card { transition: color var(--motion-normal) ease, background-color var(--motion-normal) ease, border-color var(--motion-normal) ease, box-shadow var(--motion-normal) ease, transform var(--motion-normal) var(--motion-ease-out); }
+a:active, button:active { transform: scale(.98); }
+@media (hover: hover) and (pointer: fine) { .card:hover { transform: translateY(-2px); box-shadow: 0 24px 64px rgba(0,0,0,.24); } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .motion-reveal { opacity: 1 !important; transform: none !important; }
+}
